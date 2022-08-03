@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js"></script>
+  </head>
+      <nav>
+      <a href="https://developers.afterpay.com/afterpay-online/docs/cashapp" target="_blank"
+        ><img src="https://www.afterpay.com/favicon.ico"></i
+      ></a>
+      <a href="https://developers.cash.app/docs/pay-kit-getting-started" target="_blank"
+       ><img src="https://cash.app/favicon.ico"></i                       
+      ></a>
+      <a href="https://APPSP-sandbox.afterpay-test.repl.co"
+       ><i class="fa fa-home"></i                       
+      ></a>
+    </nav>
+  <body>
+  
+  <span>
+    <h2>Afterpay Button</h2>
+    <button id="redirectedPage">
+      Instructions for redirected page
+    </button>
+  </span>
+  
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+  
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+        <pre class="prettyprint">
+          // This code should be added to the page the customer is redirected to 
+          // after completing the QR code/authentication with the Cash App.
+          // This can be the same page the button is shown (e.g. merchant.com/checkout) 
+          // Or a new page (e.g merchant.com/review)
+          // The redirect url is set in the create checkout call
+          // "redirectConfirmUrl"
+          var cashAppPayListenerOptions = {
+              onComplete: function(event) {
+                console.log(`onComplete: ${JSON.stringify(event.data, null, 4)}`);
+                window.alert(`Success: ${event.data.cashtag}`)
+              },
+          afterpayButton.initializeCashAppPayListeners({countryCode: "US", cashAppPayListenerOptions});          
+        </pre>
+    </div>
+  
+  </div>
+  <div class="row">
+    <div class="col-100">
+      <div class="container">
+        <div>        
+          <div class="row">
+            <div class="col-50">
+              <h3>Billing Address</h3>
+              <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+              <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+              <label for="email"><i class="fa fa-envelope"></i> Email</label>
+              <input type="text" id="email" name="email" placeholder="john@example.com">
+              <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+              <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+              <label for="city"><i class="fa fa-institution"></i> City</label>
+              <input type="text" id="city" name="city" placeholder="New York">
+  
+              <div class="row">
+                <div class="col-50">
+                  <label for="state">State</label>
+                  <input type="text" id="state" name="state" placeholder="NY">
+                </div>
+                <div class="col-50">
+                  <label for="zip">Zip</label>
+                  <input type="text" id="zip" name="zip" placeholder="10001">
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-50">
+              <h3>Payment</h3>
+              <label for="fname">Accepted Cards</label>
+              <div class="icon-container">
+                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                <i class="fa fa-cc-discover" style="color:orange;"></i>
+              </div>
+              <label for="cname">Name on Card</label>
+              <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+              <label for="ccnum">Credit card number</label>
+              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+              <label for="expmonth">Exp Month</label>
+              <input type="text" id="expmonth" name="expmonth" placeholder="September">
+              <div class="row">
+                <div class="col-50">
+                  <label for="expyear">Exp Year</label>
+                  <input type="text" id="expyear" name="expyear" placeholder="2018">
+                </div>
+                <div class="col-50">
+                  <label for="cvv">CVV</label>
+                  <input type="text" id="cvv" name="cvv" placeholder="352">
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <label>
+            <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+          </label>
+          <div class="place-order-target"></div>
+          <afterpay-button isCashAppPay merchantPublicKey="abaa2250913d4db3885c185e97284a42f65edd169b744d65863b574ce36e51e9"></afterpay-button>
+          <afterpay-button merchantPublicKey="822ce7ffc2fa41258904baad1d0fe07351e89375108949e8bd951d387ef0e932"></afterpay-button>
+          <button class="btn" id="afterpay-button">
+            Pay Now with Afterpay!
+          </button>
+            <pre class="prettyprint">              
+              // This can be by itself or within the onBegin callback from renderCashAppPayButton 
+              function initializeForCashAppPay(afterpayButton) {
+                var cashAppPayOptions = {
+                  redirectConfirmUrl: 'https://appsp-sandbox.afterpay-test.repl.co/button', // for mobile redirects
+                  onError: function(event) {
+                    console.log(`onError: ${JSON.stringify(event.data, null, 4)}`);
+                  },
+                  onComplete: function(event) {
+                    console.log(`onComplete: ${JSON.stringify(event.data, null, 4)}`);
+                  },
+                  eventListeners: {
+                    "CUSTOMER_INTERACTION": ({ isMobile }) => {
+                      console.log(`CUSTOMER_INTERACTION is on Mobile: ${isMobile}`)
+                    },
+                    "CUSTOMER_REQUEST_DECLINED": () => {
+                      console.log(`CUSTOMER_REQUEST_DECLINED`)
+                    },
+                    "CUSTOMER_REQUEST_APPROVED": () => {
+                      console.log(`CUSTOMER_REQUEST_APPROVED`)
+                    },
+                    "CUSTOMER_REQUEST_FAILED": () => {
+                      console.log(`CUSTOMER_REQUEST_FAILED`)
+                    }
+                  }
+                }              
+                afterpayButton.initializeForCashAppPay(cashAppPayOptions);
+              }
+              
+            // Load PayKit and render the CashAppPayButton without making any additional API calls. Token from createCheckout is 
+            not required.
+            function renderCashAppPayButton(afterpayButton) {
+              var cashAppPayButtonOptions = {
+                button: false,
+                manage: false,
+                onBegin: function({ begin }) {
+                  addEventListenerToCashAppPayButton(async (event) => {
+                    event.preventDefault();
+                    bindAttributesToButton(afterpayButton);
+                    initializeForCashAppPay(afterpayButton);
+                    begin();
+                  });
+                },
+              }
+              //This allows you to render the button without a token
+              afterpayButton.renderCashAppPayButton({
+                countryCode: "US",
+                cashAppPayButtonOptions
+              });
+            }
+            const afterpayButtons = document.querySelectorAll('afterpay-button');
+            afterpayButtons.forEach(afterpayButton => {
+              afterpayButton.addEventListener('click', bindAttributesToButton(afterpayButton), true);
+              afterpayButton.hasAttribute("isCashAppPay") && renderCashAppPayButton(afterpayButton);
+            })
+          </pre>
+        </div>
+      </div>
+  </div>
+  
+  </body>
+</html>

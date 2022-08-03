@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body onload="init()">
+    <div>
+      <div class="slider">
+        <div class="slider-form">
+          <h2>Optional Inputs</h2>
+          <label class="input">
+            <input type="text" id="redirectConfirmUrl" placeholder="redirectConfirmUrl: window.location.href" >
+            <input type="text" id="apToken" placeholder="token: 002.odwppluhfmalthkwixxxxxxxxxxxxxxxxxxxxxxx" >
+            <input type="text" id="apScript" placeholder="afterpay.js: https://portal.sandbox.afterpay.com/afterpay.js" >
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="wrapper">
+      <div class="container">
+        <nav>
+          <a href="#managedTab" class="link link1">
+            <span>Managed</span>
+          </a>
+          <a href="#advancedTab" class="link link2">
+            <span>Advanced</span>
+          </a>
+          <a href="#customTab" class="link link3">
+            <span>Custom</span>
+          </a>
+          <a href="#buttonTab" class="link link4">
+            <span>Button</span>
+          </a>
+        </nav>
+        <div class="content">
+          <div class="item item1" id="managedTab">
+            <div class="slider-ctr">
+             <div class="slider">
+               <div class="slider-form slider-one">
+                 <div class="slider-text">
+                   The simplest integration flow. Call AfterPay.initializeForCashAppPay to render a fully managed and branded Cash App Pay UI in your DOM.
+                 </div>
+                <button id="managed" class="first next">Managed UI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item item2" id="advancedTab">
+            <div class="slider-ctr">
+             <div class="slider">
+               <div class="slider-form slider-two">
+                   <div class="slider-text">
+                   For more control over the UI & UX, you may call AfterPay.renderCashAppPayButton before initializing the flow with AfterPay.initializeForCashAppPay.
+                 </div>
+                <button id="advanced" class="first next">Advanced Rendering</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item item3" id="customTab">
+            <div class="slider-ctr">
+             <div class="slider">
+               <div class="slider-form slider-three">
+                   <div class="slider-text">
+                   Examples from the Threadup/Savage x Fenty's integration
+                 </div>
+                <button id="custom" class="first next">Custom</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item item4" id="buttonTab">
+            <div class="slider-ctr">
+             <div class="slider">
+               <div class="slider-form slider-four">
+                   <div class="slider-text">
+                   AP Button x Cash App Pay
+                 </div>
+                <button id="button" class="first next">Button</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <a href="https://developers.afterpay.com/afterpay-online/docs/cashapp" target="_blank"
+        ><img src="https://www.afterpay.com/favicon.ico"></i
+      ></a>
+      <a href="https://developers.cash.app/docs/pay-kit-getting-started" target="_blank"
+       ><img src="https://cash.app/favicon.ico"></i                       
+      ></a>
+    </footer>
+<!-- works in modern browsers -->
+  </body>
+</html>
