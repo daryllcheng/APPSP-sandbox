@@ -254,7 +254,7 @@ export function getQueryParams() {
 
 export function loadAfterpayJS(fn, src = null) {
   const scriptTag = document.createElement('script');
-  scriptTag.src = src ? src : getQueryParams().apScript || "https://portal.sandbox.afterpay.com/afterpay.js";
+  scriptTag.src = src ? src : getQueryParams().apScript || "https://9bc4-71-202-86-58.ngrok.io/afterpay.js";
 
   scriptTag.onload = fn;
   scriptTag.onreadystatechange = fn;
