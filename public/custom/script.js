@@ -111,8 +111,6 @@ function placeOrderWithCashAppPay() {
   createCashAppPayText(); // Remove button and replace with text
   createPlaceOrderButton(() => { // Create the place-order button with a callback that adds an event listener
     document.querySelector('.place-order').addEventListener('click', async() => {
-      const token = await createCheckout(true);
-      initializeForCashAppPay(token);
       beginCashAppPay();
     });
   });
@@ -140,6 +138,16 @@ function initializeAfterpay() {
 
     AfterPay.transfer({ token });
   });
+}
+
+ document.getElementById("update-amount").addEventListener("click", (event) => {
+   updateAmount();
+ })
+async function updateAmount() {
+  console.log('here')
+  const amount = document.getElementById('amount').value || '77.17';
+  const token = await createCheckout(true, amount); 
+  initializeForCashAppPay(token)
 }
 
 // Simulate the removal & recreation of the place-order button when payment methods are changed
@@ -183,15 +191,17 @@ function createCashAppPayText() {
   document.getElementById('cash-app-pay').after(cashAppPayText);
 }
 
-  function initCashApp() {
+async function initCashApp() {
     createCashTagElement();
     initializeCashAppPayListeners();
     renderCashAppPayButton(); // call to render the button
+          const token = await createCheckout(true);
+      initializeForCashAppPay(token);
     initializeAfterpay(); // call to initialize the Afterpay flow
   }
   
 window.onload = loadAfterpayJS(async () => {
-  initCashApp();
+  // initCashApp();
   initializeModalPopup();
 
   document.getElementById("something-else").addEventListener("click", (event) => {

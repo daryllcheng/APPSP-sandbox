@@ -36,7 +36,7 @@ export function createCashTagElement() {
 }
 
 // Retrieve AP token
-export async function createCheckout(isCashAppPay = false) {
+export async function createCheckout(isCashAppPay = false, amount = "77.71") {
   const apToken = getQueryParams().apToken || null;
   const redirectConfirmUrl = getQueryParams().redirectConfirmUrl || window.location.href;
 
@@ -45,7 +45,7 @@ export async function createCheckout(isCashAppPay = false) {
   const payload = {
     ...(isCashAppPay && { "isCashAppPay": isCashAppPay }),
     "amount": {
-      "amount": "77.71",
+      "amount": amount,
       "currency": "USD"
     },
     "consumer": {
